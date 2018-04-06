@@ -1,4 +1,5 @@
-package com.jeffwhenderson.renderEngine;
+package com.jeffwhenderson.engineTestDrive;
+import com.jeffwhenderson.renderEngine.*; // import everything from  renderEngine
 
 import org.lwjgl.opengl.Display;
 
