@@ -18,16 +18,18 @@ public class MainGameLoop {
 		
 		float[] vertices = { /// <-------------------------------- define triangles counter clockwise by default 4 OpenGL
 				//left bottom Triangle
-			 -0.5f,  0.5f, 0f,
-			 -0.5f, -0.5f, 0f,
-			  0.5f, -0.5f, 0f,
-			  	// Right Top Triangle
-			  0.5f, -0.5f, 0f,
-			  0.5f,  0.5f, 0f,
-			 -0.5f,  0.5f, 0f
+			 -0.5f,  0.5f, 0, // 	VO
+			 -0.5f, -0.5f, 0, //	V1
+			  0.5f, -0.5f, 0, //	V2	
+			  0.5f,  0.5f, 0 //		V3
 		};
 		
-		RawModel model = loader.loadToVAO(vertices);
+		int[] indices = {
+				0,1,3, // TOP LEFT TRIANGLE -----> VO, V1, V3
+				3,1,2 // BOTTOM RIGHT TRINAGLE --> V3, V1, V2
+		};
+		
+		RawModel model = loader.loadToVAO(vertices, indices);
 
 		
 		while(!Display.isCloseRequested()) {
