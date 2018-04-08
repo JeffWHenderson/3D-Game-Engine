@@ -7,14 +7,16 @@ import com.jeffwhenderson.renderEngine.DisplayManager;
 import com.jeffwhenderson.renderEngine.Loader;
 import com.jeffwhenderson.renderEngine.RawModel;
 import com.jeffwhenderson.renderEngine.Renderer;
+import com.jeffwhenderson.shaders.StaticShader;
 
 public class MainGameLoop {
 
 	public static void main(String[] args) {
-		DisplayManager.createDisplay();
 		
+		DisplayManager.createDisplay();
 		Loader loader = new Loader();
 		Renderer renderer = new Renderer();
+		StaticShader shader = new StaticShader();
 		
 		float[] vertices = { /// <-------------------------------- define triangles counter clockwise by default 4 OpenGL
 				//left bottom Triangle
@@ -33,13 +35,15 @@ public class MainGameLoop {
 
 		
 		while(!Display.isCloseRequested()) {
-			renderer.prepare();
 			// game logic
+			renderer.prepare();
+			shader.start();
 			renderer.render(model);
-			
+			shader.stop();
 			DisplayManager.updateDisplay();
 		}
 		
+		shader.cleanUp();
 		loader.cleanUp();
 		DisplayManager.closeDisplay();
 	}
