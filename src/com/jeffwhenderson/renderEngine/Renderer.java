@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import com.jeffwhenderson.models.RawModel;
+import com.jeffwhenderson.models.TexturedModel;
 
 public class Renderer {
 	public void prepare() {
@@ -12,7 +13,8 @@ public class Renderer {
 		GL11.glClearColor(1, 0, 0, 1); // <------------------------------ RED BACKGROUND (R, G, B, A)
 	}
 	
-	public void render(RawModel model) {
+	public void render(TexturedModel texturedModel) {
+		RawModel model = texturedModel.getRawModel();
 		GL30.glBindVertexArray(model.getVaoID());
 		GL20.glEnableVertexAttribArray(0);
 		GL11.glDrawElements(GL11.GL_TRIANGLES, model.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);

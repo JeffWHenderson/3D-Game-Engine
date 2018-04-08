@@ -4,10 +4,12 @@ package com.jeffwhenderson.engineTestDrive;
 import org.lwjgl.opengl.Display;
 
 import com.jeffwhenderson.models.RawModel;
+import com.jeffwhenderson.models.TexturedModel;
 import com.jeffwhenderson.renderEngine.DisplayManager;
 import com.jeffwhenderson.renderEngine.Loader;
 import com.jeffwhenderson.renderEngine.Renderer;
 import com.jeffwhenderson.shaders.StaticShader;
+import com.jeffwhenderson.textures.ModelTexture;
 
 public class MainGameLoop {
 
@@ -32,13 +34,14 @@ public class MainGameLoop {
 		};
 		
 		RawModel model = loader.loadToVAO(vertices, indices);
-
+		ModelTexture texture = new ModelTexture(loader.loadTexture("Coke"));
+		TexturedModel texturedModel = new TexturedModel(model, texture);
 		
 		while(!Display.isCloseRequested()) {
 			// game logic
 			renderer.prepare();
 			shader.start();
-			renderer.render(model);
+			renderer.render(texturedModel);
 			shader.stop();
 			DisplayManager.updateDisplay();
 		}
