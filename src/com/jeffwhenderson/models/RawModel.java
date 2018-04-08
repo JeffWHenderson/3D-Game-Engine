@@ -1,4 +1,4 @@
-package com.jeffwhenderson.renderEngine;
+package com.jeffwhenderson.models;
 
 public class RawModel {
 	private int vaoID;

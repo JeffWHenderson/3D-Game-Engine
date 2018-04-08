@@ -3,9 +3,9 @@ package com.jeffwhenderson.engineTestDrive;
 
 import org.lwjgl.opengl.Display;
 
+import com.jeffwhenderson.models.RawModel;
 import com.jeffwhenderson.renderEngine.DisplayManager;
 import com.jeffwhenderson.renderEngine.Loader;
-import com.jeffwhenderson.renderEngine.RawModel;
 import com.jeffwhenderson.renderEngine.Renderer;
 import com.jeffwhenderson.shaders.StaticShader;
 
