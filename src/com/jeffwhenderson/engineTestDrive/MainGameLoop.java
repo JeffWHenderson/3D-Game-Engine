@@ -5,6 +5,7 @@ package com.jeffwhenderson.engineTestDrive;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 
+import com.jeffwhenderson.entities.Camera;
 import com.jeffwhenderson.entities.Entity;
 import com.jeffwhenderson.models.RawModel;
 import com.jeffwhenderson.models.TexturedModel;
@@ -47,12 +48,15 @@ public class MainGameLoop {
 		ModelTexture texture = new ModelTexture(loader.loadTexture("Coke"));
 		TexturedModel texturedModel = new TexturedModel(model, texture);
 		Entity entity = new Entity(texturedModel, new Vector3f(0,0,-1),0,0,0,1);
+		Camera camera = new Camera();
 		
 		while(!Display.isCloseRequested()) {
 			// game logic
-			entity.increasePosition(0, 0, -0.01f); //<----------- this should push the image back into the screen as if it were farther away.
+			entity.increasePosition(0, 0, -0.0f); //<----------- this should push the image back into the screen as if it were farther away.
+			camera.move();
 			renderer.prepare();
 			shader.start();
+			shader.loadViewMatrix(camera);
 			renderer.render(entity, shader);
 			shader.stop();
 			DisplayManager.updateDisplay();
