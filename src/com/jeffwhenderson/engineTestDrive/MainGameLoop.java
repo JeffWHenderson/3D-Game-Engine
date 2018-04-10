@@ -1,8 +1,11 @@
 package com.jeffwhenderson.engineTestDrive;
 //import com.jeffwhenderson.renderEngine.*; // import everything from  renderEngine
 
-import org.lwjgl.opengl.Display;
 
+import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector3f;
+
+import com.jeffwhenderson.entities.Entity;
 import com.jeffwhenderson.models.RawModel;
 import com.jeffwhenderson.models.TexturedModel;
 import com.jeffwhenderson.renderEngine.DisplayManager;
@@ -43,12 +46,13 @@ public class MainGameLoop {
 		RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
 		ModelTexture texture = new ModelTexture(loader.loadTexture("Coke"));
 		TexturedModel texturedModel = new TexturedModel(model, texture);
+		Entity entity = new Entity(texturedModel, new Vector3f(-1,0,0),0,0,0,1);
 		
 		while(!Display.isCloseRequested()) {
 			// game logic
 			renderer.prepare();
 			shader.start();
-			renderer.render(texturedModel);
+			renderer.render(entity, shader);
 			shader.stop();
 			DisplayManager.updateDisplay();
 		}
