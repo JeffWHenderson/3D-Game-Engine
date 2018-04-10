@@ -20,8 +20,8 @@ public class MainGameLoop {
 		
 		DisplayManager.createDisplay();
 		Loader loader = new Loader();
-		Renderer renderer = new Renderer();
 		StaticShader shader = new StaticShader();
+		Renderer renderer = new Renderer(shader);
 		
 		float[] vertices = { /// <-------------------------------- define triangles counter clockwise by default 4 OpenGL
 				//left bottom Triangle
@@ -46,10 +46,11 @@ public class MainGameLoop {
 		RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
 		ModelTexture texture = new ModelTexture(loader.loadTexture("Coke"));
 		TexturedModel texturedModel = new TexturedModel(model, texture);
-		Entity entity = new Entity(texturedModel, new Vector3f(-1,0,0),0,0,0,1);
+		Entity entity = new Entity(texturedModel, new Vector3f(0,0,-1),0,0,0,1);
 		
 		while(!Display.isCloseRequested()) {
 			// game logic
+			entity.increasePosition(0, 0, -0.01f); //<----------- this should push the image back into the screen as if it were farther away.
 			renderer.prepare();
 			shader.start();
 			renderer.render(entity, shader);
