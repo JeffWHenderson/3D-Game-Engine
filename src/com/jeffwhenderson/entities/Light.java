@@ -1,4 +1,4 @@
-package com.jeffwhenderson.engineTestDrive;
+package com.jeffwhenderson.entities;
 
 import org.lwjgl.util.vector.Vector3f;
 

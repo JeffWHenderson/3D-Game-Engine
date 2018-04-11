@@ -2,7 +2,7 @@ package com.jeffwhenderson.shaders;
 
 import org.lwjgl.util.vector.Matrix4f;
 
-import com.jeffwhenderson.engineTestDrive.Light;
+import com.jeffwhenderson.entities.Light;
 import com.jeffwhenderson.entities.Camera;
 import com.jeffwhenderson.toolbox.Maths;
 
@@ -24,6 +24,7 @@ public class StaticShader extends ShaderProgram {
 	protected void bindAttributes() {
 		super.bindAttribute(0, "position");
 		super.bindAttribute(1, "textureCoords");
+		super.bindAttribute(2, "normal");
 	}
 
 	@Override
