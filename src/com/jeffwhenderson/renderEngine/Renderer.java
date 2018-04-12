@@ -11,6 +11,7 @@ import com.jeffwhenderson.entities.Entity;
 import com.jeffwhenderson.models.RawModel;
 import com.jeffwhenderson.models.TexturedModel;
 import com.jeffwhenderson.shaders.StaticShader;
+import com.jeffwhenderson.textures.ModelTexture;
 import com.jeffwhenderson.toolbox.Maths;
 
 public class Renderer {
@@ -42,6 +43,9 @@ public class Renderer {
 		GL20.glEnableVertexAttribArray(2);
 		Matrix4f transformationMatrix = Maths.createTransformationMatrix(entity.getPosition(), entity.getRotX(), entity.getRotY(), entity.getRotZ(), entity.getScale());
 		shader.loadTransformationMatrix(transformationMatrix);
+		
+		ModelTexture texture = model.getModelTexture();
+		shader.loadShineVariable(texture.getShineDamper(), texture.getReflectivity());
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getModelTexture().getID()); // <----------------- Check ere possibly
 		GL11.glDrawElements(GL11.GL_TRIANGLES, rawModel.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
