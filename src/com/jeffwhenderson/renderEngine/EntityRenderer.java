@@ -17,7 +17,7 @@ import com.jeffwhenderson.shaders.StaticShader;
 import com.jeffwhenderson.textures.ModelTexture;
 import com.jeffwhenderson.toolbox.Maths;
 
-public class Renderer {
+public class EntityRenderer {
 	private static final float FOV = 70;
 	private static final float NEAR_PLANE = 0.1f;
 	private static final float FAR_PLANE = 1000;
@@ -25,7 +25,7 @@ public class Renderer {
 	private Matrix4f projectionMatrix;
 	private StaticShader shader;
 	
-	public Renderer(StaticShader shader) {
+	public EntityRenderer(StaticShader shader) {
 		this.shader = shader;
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glCullFace(GL11.GL_BACK);
