@@ -12,9 +12,8 @@ import com.jeffwhenderson.models.RawModel;
 import com.jeffwhenderson.models.TexturedModel;
 import com.jeffwhenderson.renderEngine.DisplayManager;
 import com.jeffwhenderson.renderEngine.Loader;
+import com.jeffwhenderson.renderEngine.MasterRenderer;
 import com.jeffwhenderson.renderEngine.OBJLoader;
-import com.jeffwhenderson.renderEngine.Renderer;
-import com.jeffwhenderson.shaders.StaticShader;
 import com.jeffwhenderson.textures.ModelTexture;
 
 public class MainGameLoop {
@@ -23,8 +22,7 @@ public class MainGameLoop {
 		
 		DisplayManager.createDisplay();
 		Loader loader = new Loader();
-		StaticShader shader = new StaticShader();
-		Renderer renderer = new Renderer(shader);
+
 		
 //		//////////////////////   STALL   ////////////////////
 //		RawModel model = OBJLoader.loadOBJModel("stall", loader);
@@ -46,22 +44,17 @@ public class MainGameLoop {
 		Light light = new Light(new Vector3f(0,0,-20), new Vector3f(1,1,1));
 		
 		Camera camera = new Camera();
+		MasterRenderer renderer = new MasterRenderer();
 		
 		while(!Display.isCloseRequested()) {
-			// game logic
-			dragonEntity.increaseRotation(0, -1f, 0);
 			camera.move();
-			renderer.prepare();
-			shader.start();
-			shader.loadLight(light);
-			shader.loadViewMatrix(camera);
-//			renderer.render(entity, shader);
-			renderer.render(dragonEntity, shader);
-			shader.stop();
+			renderer.processEntity(dragonEntity);
+			dragonEntity.increaseRotation(0, -1f, 0); //////// spinning spinning spinning
+			renderer.render(light, camera);
 			DisplayManager.updateDisplay();
 		}
 		
-		shader.cleanUp();
+		renderer.cleanUp();
 		loader.cleanUp();
 		DisplayManager.closeDisplay();
 	}
