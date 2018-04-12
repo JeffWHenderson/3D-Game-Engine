@@ -25,109 +25,30 @@ public class MainGameLoop {
 		Loader loader = new Loader();
 		StaticShader shader = new StaticShader();
 		Renderer renderer = new Renderer(shader);
-		////////////////////////////////// OLD CODE TO MAKE THE 'FACEBOOK CUBE' //////////////
-//		float[] vertices = {			
-//				-0.5f,0.5f,-0.5f,	
-//				-0.5f,-0.5f,-0.5f,	
-//				0.5f,-0.5f,-0.5f,	
-//				0.5f,0.5f,-0.5f,		
-//				
-//				-0.5f,0.5f,0.5f,	
-//				-0.5f,-0.5f,0.5f,	
-//				0.5f,-0.5f,0.5f,	
-//				0.5f,0.5f,0.5f,
-//				
-//				0.5f,0.5f,-0.5f,	
-//				0.5f,-0.5f,-0.5f,	
-//				0.5f,-0.5f,0.5f,	
-//				0.5f,0.5f,0.5f,
-//				
-//				-0.5f,0.5f,-0.5f,	
-//				-0.5f,-0.5f,-0.5f,	
-//				-0.5f,-0.5f,0.5f,	
-//				-0.5f,0.5f,0.5f,
-//				
-//				-0.5f,0.5f,0.5f,
-//				-0.5f,0.5f,-0.5f,
-//				0.5f,0.5f,-0.5f,
-//				0.5f,0.5f,0.5f,
-//				
-//				-0.5f,-0.5f,0.5f,
-//				-0.5f,-0.5f,-0.5f,
-//				0.5f,-0.5f,-0.5f,
-//				0.5f,-0.5f,0.5f
-//				
-//		};
-//		
-//		float[] textureCoords = {
-//				
-//				0,0,
-//				0,1,
-//				1,1,
-//				1,0,			
-//				0,0,
-//				0,1,
-//				1,1,
-//				1,0,			
-//				0,0,
-//				0,1,
-//				1,1,
-//				1,0,
-//				0,0,
-//				0,1,
-//				1,1,
-//				1,0,
-//				0,0,
-//				0,1,
-//				1,1,
-//				1,0,
-//				0,0,
-//				0,1,
-//				1,1,
-//				1,0
-//
-//				
-//		};
-//		
-//		int[] indices = {
-//				0,1,3,	
-//				3,1,2,	
-//				4,5,7,
-//				7,5,6,
-//				8,9,11,
-//				11,9,10,
-//				12,13,15,
-//				15,13,14,	
-//				16,17,19,
-//				19,17,18,
-//				20,21,23,
-//				23,21,22
-//
-//		};
-		// CREATE MODEL HERE
-//		ModelTexture texture = new ModelTexture(loader.loadTexture("facebook-256px"));
-		//CREATE TEXTURED MODEL HERE
-		//CREATE ENTITY HERE
-////////////////////////////////// OLD CODE TO MAKE THE 'FACEBOOK CUBE' //////////////
 		
-		//////////////////////   STALL   ////////////////////
+//		//////////////////////   STALL   ////////////////////
 		RawModel model = OBJLoader.loadOBJModel("stall", loader);
 		ModelTexture texture = new ModelTexture(loader.loadTexture("stallTexture"));
+		texture.setShineDamper(50);
+		texture.setReflectivity(.5f);
 		TexturedModel texturedModel = new TexturedModel(model, texture);
+		Entity entity = new Entity(texturedModel, new Vector3f(0,0,-50),0,150,0,1);
 		//////////////DRAGON ////////////////////////
+	
 		RawModel dragonModel = OBJLoader.loadOBJModel("dragon", loader);
+		
 		TexturedModel texturedDragonModel = new TexturedModel(dragonModel, new ModelTexture(loader.loadTexture("wood")));
+		ModelTexture dragonTexture = texturedDragonModel.getModelTexture();
+		dragonTexture.setShineDamper(10);
+		dragonTexture.setReflectivity(1);
 		Entity dragonEntity = new Entity(texturedDragonModel, new Vector3f(0,-20,-60),0,0,0,2);
 
-		
-		Entity entity = new Entity(texturedModel, new Vector3f(0,0,-50),0,0,0,1);
 		Light light = new Light(new Vector3f(0,0,-20), new Vector3f(1,1,1));
 		
 		Camera camera = new Camera();
 		
 		while(!Display.isCloseRequested()) {
 			// game logic
-			entity.increaseRotation(0, 0.2f, 0);;
 			dragonEntity.increaseRotation(0, -0.2f, 0);
 			camera.move();
 			renderer.prepare();
