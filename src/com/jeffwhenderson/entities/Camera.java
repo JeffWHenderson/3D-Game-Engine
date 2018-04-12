@@ -11,16 +11,16 @@ public class Camera {
 
 	public void move() {
 		if(Keyboard.isKeyDown(Keyboard.KEY_W)) {
-			position.z-=0.06f;
+			position.z-=1f;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_S)) { //<-----------not sure if I will be moving backwards
-			position.z+=0.06f;
+			position.z+=1f;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			position.x+=0.06f;
+			position.x+=1f;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			position.x-=0.06f;
+			position.x-=1f;
 		}
 	}
 	
