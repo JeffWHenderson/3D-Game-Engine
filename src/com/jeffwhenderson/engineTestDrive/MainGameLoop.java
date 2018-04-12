@@ -116,20 +116,19 @@ public class MainGameLoop {
 		TexturedModel texturedModel = new TexturedModel(model, texture);
 		//////////////DRAGON ////////////////////////
 		RawModel dragonModel = OBJLoader.loadOBJModel("dragon", loader);
-		TexturedModel texturedDragonModel = new TexturedModel(dragonModel, new ModelTexture(loader.loadTexture("white")));
+		TexturedModel texturedDragonModel = new TexturedModel(dragonModel, new ModelTexture(loader.loadTexture("wood")));
 		Entity dragonEntity = new Entity(texturedDragonModel, new Vector3f(0,-20,-60),0,0,0,2);
 
 		
 		Entity entity = new Entity(texturedModel, new Vector3f(0,0,-50),0,0,0,1);
-		Entity entity2 = new Entity(texturedModel, new Vector3f(6,-3,-10),0,150,0,.7f); ///// REMOVE THIS TEST CODE
 		Light light = new Light(new Vector3f(0,0,-20), new Vector3f(1,1,1));
 		
 		Camera camera = new Camera();
 		
 		while(!Display.isCloseRequested()) {
 			// game logic
-			entity.increaseRotation(0, 0.4f, 0);;
-			dragonEntity.increaseRotation(0, -0.4f, 0);
+			entity.increaseRotation(0, 0.2f, 0);;
+			dragonEntity.increaseRotation(0, -0.2f, 0);
 			camera.move();
 			renderer.prepare();
 			shader.start();
@@ -137,7 +136,6 @@ public class MainGameLoop {
 			shader.loadViewMatrix(camera);
 			renderer.render(entity, shader);
 			renderer.render(dragonEntity, shader);
-			renderer.render(entity2, shader); ///////////// REMOVE THIS TEST CODE
 			shader.stop();
 			DisplayManager.updateDisplay();
 		}
